@@ -304,8 +304,6 @@ function App() {
         }
       }, 25)
       return () => window.clearInterval(timer)
-    } else if (snoopyPhase === 2) {
-      window.setTimeout(() => setSnoopyPhase(3), 1200)
     }
   }, [snoopyPhase])
 
@@ -876,11 +874,20 @@ function App() {
 
               {snoopyPhase === 2 && (
                 <>
-                  <motion.div className="snoopy-bubble" initial={{ opacity: 0 }} animate={{ opacity: 1 }}><p className="snoopy-text">But before that...<br />Are you ready?</p></motion.div>
-                  <motion.div className="snoopy-buttons" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-                    <button className="snoopy-btn snoopy-yes" onClick={() => setSnoopyPhase(3)}>I'm ready! 💖</button>
-                    <button className="snoopy-btn snoopy-wait" onClick={() => setSnoopyPhase(3)}>Wait… what? 😳</button>
+                  <motion.div className="snoopy-bubble" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', stiffness: 100 }}>
+                    <p className="snoopy-text">Are you ready?</p>
                   </motion.div>
+                  <motion.button 
+                    className="snoopy-btn snoopy-yes" 
+                    onClick={() => setSnoopyPhase(3)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    I'm ready! 💖
+                  </motion.button>
                 </>
               )}
 
